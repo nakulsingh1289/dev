@@ -1,15 +1,31 @@
 import "./App.css";
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { AuthProvider } from "./context/AuthContext";
+import Feed from "./Components/Feed";
+import Login from "./Components/Login";
+import PrivateRoute from "./Components/PrivateRoute";
+import Signup from "./Components/Signup";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <PrivateRoute>
+                <Feed />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
