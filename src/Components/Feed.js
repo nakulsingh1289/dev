@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "../context/AuthContext";
+import Posts from "./Posts";
 import UploadFile from "./UploadFile";
 import { database } from "../firebase";
 
@@ -28,6 +29,7 @@ export default function Feed() {
       <h1>Feed Component</h1>
       <button onClick={logout}>Logout</button>
       <UploadFile user={userData} />
+      <Posts userData={userData} />
     </div>
   );
 }
