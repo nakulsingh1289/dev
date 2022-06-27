@@ -25,7 +25,6 @@ function Video(props) {
       id={props.id}
       onClick={handleClick}
       muted="muted"
-      autoPlay={true}
     />
   );
 }

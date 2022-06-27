@@ -40,6 +40,30 @@ function Posts({ userData }) {
   const handleClickOpen = (id) => {
     setOpen(id);
   };
+
+  const callback = (entries) => {
+    entries.forEach((entry) => {
+      let element = entry.target.childNodes[0];
+      console.log(element);
+      element.play().then(() => {
+        if (!element.paused && !entry.isIntersecting) {
+          element.pause();
+        }
+      });
+    });
+  };
+
+  let observer = new IntersectionObserver(callback, { threshold: 0.6 });
+  useEffect(() => {
+    const elements = document.querySelectorAll(".videos");
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+    return () => {
+      observer.disconnect();
+    };
+  }, [posts]);
+
   return (
     <div>
       {posts == null || userData == null ? (
